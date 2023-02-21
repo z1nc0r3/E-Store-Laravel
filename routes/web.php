@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\UserAuthController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,5 +15,13 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    if (!session() -> has('isLogged')) {
+        return redirect('login');
+    }
 });
+
+Route::get('/login', function() {
+    return view('login');
+});
+
+Route::post('/login/check', [UserAuthController::class, 'login']);
