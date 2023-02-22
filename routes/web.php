@@ -14,14 +14,27 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    if (!session() -> has('isLogged')) {
-        return redirect('login');
-    }
+Route::get('/', function() {
+    return redirect() -> route('login');
 });
 
 Route::get('/login', function() {
-    return view('login');
-});
+    return view('components.login');
+}) -> name('login');
 
 Route::post('/login/check', [UserAuthController::class, 'login']);
+
+Route::group(['prefix' => 'admin'], function() {
+    if (!session() -> has('isLogged') || !session() -> get('isLogged') || !session() -> get('role') == 'admin') {
+        return redirect() -> route('login');
+    }
+
+    Route::get('/dashboard', function() {
+        return view('admin.dashboard');
+    });
+
+    Route::get('/logout', function() {
+        session() -> flush();
+        return redirect() -> route('login');
+    });
+});
