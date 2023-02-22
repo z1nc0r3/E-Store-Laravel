@@ -35,6 +35,7 @@
             <label class="form-check-label">Remember me</label>
           </div>
           <button type="submit" class="btn btn-primary w-100">Login</button>
+          <a href="/register" style="text-decoration: none; color: white"><button type="button" class="btn btn-secondary w-100 mt-2">Register</button></a>
         </form>
     </div>
 </body>
