@@ -31,12 +31,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['admin']], function() {
 
     Route::get('/dashboard', function() {
         return view('admin.dashboard');
-    }) -> name('dashboard');
-
-    Route::get('/logout', function() {
-        session() -> flush();
-        return redirect() -> route('login');
-    });
+    }) -> name('admin.dashboard');
 
     Route::get('/customers', function() {
         return view('admin.customers');
@@ -49,4 +44,9 @@ Route::group(['prefix' => 'admin', 'middleware' => ['admin']], function() {
     Route::get('/customers/edit', function() {
         return view('customer.edit');
     });
+});
+
+Route::get('/logout', function() {
+    session() -> flush();
+    return redirect() -> route('login');
 });
