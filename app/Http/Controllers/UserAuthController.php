@@ -16,18 +16,17 @@ class UserAuthController extends Controller
 
         $credentials = $request -> only('email', 'password');
 
-        return view('admin.dashboard');
-
         if (Auth::attempt($credentials)) {
-            session() -> put('isLogged', true);
-
             $role = Auth::user() -> role;
+            
+            session() -> put('isLogged', true);
+            session() -> put('role', $role);
 
             switch ($role) {
                 case 'admin':
-                    return redirect(route('admin.dashboard'));
+                    return redirect() -> route('admin.dashboard');
                     break;
-                case 'user':
+                case 'customer':
                     return redirect() -> route('customer.dashboard');
                     break;
                 case 'employee':
@@ -37,8 +36,9 @@ class UserAuthController extends Controller
                     break;
             }
         } else {
+            session() -> put('isLogged', false);
             session() -> put('error', 'Invalid email or password');
-            return view('login');
+            return redirect() -> route('login');
         }
     }
 }
