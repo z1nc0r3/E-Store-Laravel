@@ -37,4 +37,16 @@ Route::group(['prefix' => 'admin', 'middleware' => ['admin']], function() {
         session() -> flush();
         return redirect() -> route('login');
     });
+
+    Route::get('/customers', function() {
+        return view('admin.customers');
+    });
+
+    Route::get('/customers/create', function() {
+        return view ('customer.create');
+    });
+
+    Route::get('/customers/edit', function() {
+        return view('customer.edit');
+    });
 });
