@@ -11,9 +11,13 @@
 <body>
 	<div class="container d-flex flex-column">
 
-		@if (session()->has('error'))
-			<div class="alert alert-danger" role="alert">
-				{{ session()->get('error') }}
+		@if ($errors->any())
+			<div class="alert alert-danger">
+				<ul>
+					@foreach ($errors->all() as $error)
+						<li>{{ $error }}</li>
+					@endforeach
+				</ul>
 			</div>
 		@endif
 
@@ -21,27 +25,27 @@
 			@csrf
 			<div class="form-group">
 				<label>Name</label>
-				<input type="text" class="form-control mt-2 mb-3" name="name" placeholder="Enter name">
+				<input type="text" class="form-control mt-2 mb-3" name="name" placeholder="Enter name" value="{{old('name')}}">
 			</div>
 			<div class="form-group">
 				<label>Email</label>
-				<input type="email" class="form-control mt-2 mb-3" name="email" placeholder="Enter email">
+				<input type="email" class="form-control mt-2 mb-3" name="email" placeholder="Enter email" value="{{old('email')}}"">
 			</div>
 			<div class="form-group">
 				<label>Address</label>
-				<input type="text" class="form-control mt-2 mb-3" name="address" placeholder="Enter address">
+				<input type="text" class="form-control mt-2 mb-3" name="address" placeholder="Enter address" value="{{old('address')}}"">
 			</div>
-            <div class="form-group mb-3">
-                <lable>Gender</lable>
-                <select class="form-select" name="gender">
-                    <option selected>Select a gender</option>
-                    <option value="male">Male</option>
-                    <option vlaue="female">Female</option>
-                </select>
-            </div>
+			<div class="form-group mb-3">
+				<lable>Gender</lable>
+				<select class="form-select" name="gender">
+					<option selected>Select a gender</option>
+					<option value="male">Male</option>
+					<option vlaue="female">Female</option>
+				</select>
+			</div>
 			<div class="form-group">
 				<label>Mobile</label>
-				<input type="number" class="form-control mt-2 mb-3" name="mobile" placeholder="Enter mobile">
+				<input type="number" class="form-control mt-2 mb-3" name="mobile" placeholder="Enter mobile" value="{{old('mobile')}}"">
 			</div>
 			<div class="form-group mt-3">
 				<label>Password</label>

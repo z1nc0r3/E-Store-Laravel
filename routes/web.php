@@ -22,7 +22,12 @@ Route::get('/login', function() {
     return view('components.login');
 }) -> name('login');
 
+Route::get('/register', function() {
+    return view('components.register');
+}) -> name('register');
+
 Route::post('/login/check', [UserAuthController::class, 'login']);
+Route::post('/register/check', [UserAuthController::class, 'register']);
 
 Route::group(['prefix' => 'admin', 'middleware' => ['admin']], function() {
     Route::get('/', function() {

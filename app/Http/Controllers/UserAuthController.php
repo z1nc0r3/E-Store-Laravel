@@ -37,8 +37,16 @@ class UserAuthController extends Controller
             }
         } else {
             session() -> put('isLogged', false);
-            session() -> put('error', 'Invalid email or password');
+            session() -> put('loginError', 'Invalid email or password');
             return redirect() -> route('login');
         }
+    }
+
+    public function register(Request $request) {
+        $request -> validate([
+            'email' => 'required | email',
+            'password' => 'required | min:6 | alpha_num',
+            'mobile' => 'required | min:10 | max:10',
+        ]);
     }
 }
