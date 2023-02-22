@@ -24,14 +24,14 @@ Route::get('/login', function() {
 
 Route::post('/login/check', [UserAuthController::class, 'login']);
 
-Route::group(['prefix' => 'admin'], function() {
-    if (!session() -> has('isLogged') || !session() -> get('isLogged') || !session() -> get('role') == 'admin') {
-        return redirect() -> route('login');
-    }
+Route::group(['prefix' => 'admin', 'middleware' => ['admin']], function() {
+    Route::get('/', function() {
+        return redirect() -> route('dashboard');
+    });
 
     Route::get('/dashboard', function() {
         return view('admin.dashboard');
-    });
+    }) -> name('dashboard');
 
     Route::get('/logout', function() {
         session() -> flush();
