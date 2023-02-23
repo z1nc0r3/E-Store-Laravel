@@ -19,6 +19,22 @@ Route::get('/', function() {
 });
 
 Route::get('/login', function() {
+    if (session() -> has('isLogged') && session() -> get('isLogged') == true) {
+        switch (session() -> get('role')) {
+            case 'admin':
+                return redirect() -> route('admin.dashboard');
+                break;
+            case 'customer':
+                return redirect() -> route('customer.dashboard');
+                break;
+            case 'employee':
+                return redirect() -> route('employee.dashboard');
+            default:
+                return redirect() -> route('login');
+                break;
+        }
+    }
+    
     return view('components.login');
 }) -> name('login');
 
@@ -31,7 +47,7 @@ Route::post('/register/check', [UserAuthController::class, 'register']);
 
 Route::group(['prefix' => 'admin', 'middleware' => ['admin']], function() {
     Route::get('/', function() {
-        return redirect() -> route('dashboard');
+        return redirect() -> route('admin.dashboard');
     });
 
     Route::get('/dashboard', function() {
@@ -42,13 +58,18 @@ Route::group(['prefix' => 'admin', 'middleware' => ['admin']], function() {
         return view('admin.customers');
     });
 
-    Route::get('/customers/create', function() {
-        return view ('customer.create');
+});
+
+Route::group(['prefix' => 'customer', 'middleware' => ['customer']], function() {
+    Route::get('/', function() {
+        return redirect() -> route('customer.dashboard');
     });
 
-    Route::get('/customers/edit', function() {
-        return view('customer.edit');
-    });
+    Route::get('/dashboard', function() {
+        return view('customer.dashboard');
+    }) -> name('customer.dashboard');
+
+    // Route::get('/')
 });
 
 Route::get('/logout', function() {
