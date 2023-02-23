@@ -20,5 +20,9 @@ class DatabaseSeeder extends Seeder
             'password' => 'admin123',
             'role' => 'admin',
         ]);
+
+        \App\Models\Products::factory()->create([
+
+        ]);
     }
 }
