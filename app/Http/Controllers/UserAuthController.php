@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Models\User;
 
 class UserAuthController extends Controller
 {
@@ -21,6 +22,7 @@ class UserAuthController extends Controller
             
             session() -> put('isLogged', true);
             session() -> put('role', $role);
+            session() -> put('name', session() -> has('name') ? session() -> get('name') : Auth::user() -> name);
 
             switch ($role) {
                 case 'admin':
@@ -38,6 +40,7 @@ class UserAuthController extends Controller
         } else {
             session() -> put('isLogged', false);
             session() -> put('loginError', 'Invalid email or password');
+            error_log('here');
             return redirect() -> route('login');
         }
     }
@@ -48,5 +51,26 @@ class UserAuthController extends Controller
             'password' => 'required | min:6 | alpha_num',
             'mobile' => 'required | min:10 | max:10',
         ]);
+
+        $user = new User([
+            'name' => $request -> name,
+            'email' => $request -> email,
+            'address' => $request -> address,
+            'mobile' => $request -> mobile,
+            'gender' => $request -> gender,
+            'password' => $request -> password,
+            'role' => $request -> role
+        ]);
+
+        if ($user -> save()) {
+            session() -> put('isLogged', true);
+            session() -> put('role', 'customer');
+            session() -> put('name', $request -> name);
+            return redirect() -> route('customer.dashboard');
+        } else {
+            session() -> put('isLogged', false);
+            session() -> put('loginError', 'Invalid email or password');
+            return redirect() -> route('login');
+        }
     }
 }
