@@ -4,7 +4,7 @@
 <body>
 	<nav class="navbar navbar-expand-lg bg-primary" data-bs-theme="dark">
 		<div class="container-fluid">
-			<a class="navbar-brand" href="#">Admin Dashboard</a>
+			<a class="navbar-brand">Admin Dashboard</a>
 			<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
 				aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
 				<span class="navbar-toggler-icon"></span>
@@ -12,13 +12,13 @@
 			<div class="collapse navbar-collapse d-flex flex-row justify-content-between" id="navbarNav">
 				<ul class="navbar-nav">
 					<li class="nav-item">
-						<a class="nav-link active" aria-current="page" href="#">Dashboard</a>
+						<a class="nav-link {{(session() -> get('current') == 'dashboard') ? 'active' : ''}}" aria-current="page" href="{{url('/admin/dashboard')}}">Dashboard</a>
 					</li>
 					<li class="nav-item">
-						<a class="nav-link" href="#">Products</a>
+						<a class="nav-link {{(session() -> get('current') == 'products') ? 'active' : ''}}" href="{{url('/admin/products')}}">Products</a>
 					</li>
 					<li class="nav-item">
-						<a class="nav-link" href="#">Employees</a>
+						<a class="nav-link {{(session() -> get('current') == 'employees') ? 'active' : ''}}" href="{{url('/admin/empoloyee')}}">Employees</a>
 					</li>
 				</ul>
                 <div>

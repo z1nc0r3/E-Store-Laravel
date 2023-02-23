@@ -1,3 +1,4 @@
-{{session() -> put('current', 'dashboard')}}
+
+{{session() -> put('current', 'order')}}
 @include('components/customerheader')
 @include('components/footer')
