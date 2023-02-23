@@ -34,7 +34,7 @@ Route::get('/login', function() {
                 break;
         }
     }
-    
+
     return view('components.login');
 }) -> name('login');
 
@@ -54,8 +54,19 @@ Route::group(['prefix' => 'admin', 'middleware' => ['admin']], function() {
         return view('admin.dashboard');
     }) -> name('admin.dashboard');
 
-    Route::get('/customers', function() {
-        return view('admin.customers');
+    Route::get('/products', function() {
+        return view('admin.products');
+    }) -> name('admin.products');
+
+    Route::get('/addproducts', function() {
+        return view('admin.addproducts');
+    }) -> name('admin.addproducts');
+
+    Route::post('/addproducts/check', [ProductsController::class, 'addProduct']);
+    
+
+    Route::get('/employees', function() {
+        return view('admin.employees');
     });
 
 });
@@ -69,7 +80,23 @@ Route::group(['prefix' => 'customer', 'middleware' => ['customer']], function() 
         return view('customer.dashboard');
     }) -> name('customer.dashboard');
 
-    // Route::get('/')
+    Route::get('/order', function() {
+        return view('customer.order');
+    });
+});
+
+Route::group(['prefix' => 'employee', 'middleware' => ['employee']], function() {
+    Route::get('/', function() {
+        return redirect() -> route('employee.dashboard');
+    });
+
+    Route::get('/dashboard', function() {
+        return view('customer.dashboard');
+    }) -> name('customer.dashboard');
+
+    Route::get('/order', function() {
+        return view('customer.order');
+    });
 });
 
 Route::get('/logout', function() {
