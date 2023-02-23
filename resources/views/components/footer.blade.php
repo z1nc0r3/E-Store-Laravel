@@ -1,6 +1,6 @@
 <div class="container">
-    <footer class="py-3 my-4">
-      <p class="text-center text-muted">© 2023 Zinc Studio</p>
+    <footer class="">
+      <p class="text-center text-muted float-bottom">© 2023 Zinc Studio</p>
     </footer>
   </div>
 
