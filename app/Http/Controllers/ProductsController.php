@@ -31,4 +31,23 @@ class ProductsController extends Controller
         $products = Products::all();
         return view('admin.products', ['products' => $products]);
     }
+
+    public function deleteProduct($id) {
+        $product = Products::find($id);
+
+        if ($product -> delete()) {
+            return redirect() -> route('admin.products');
+        } else {
+            return redirect() -> route('admin.products');
+        }
+    }
+
+    public function editProduct($id) {
+        $product = Products::find($id);
+        return view('admin.editproduct', ['product' => $product]);
+    }
+
+    public function updateProduct(Request $request) {
+        
+    }
 }
