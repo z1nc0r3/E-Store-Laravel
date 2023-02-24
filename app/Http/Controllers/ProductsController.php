@@ -26,4 +26,9 @@ class ProductsController extends Controller
             return redirect() -> route('admin.addproducts');
         }
     }
+
+    public function showProducts() {
+        $products = Products::all();
+        return view('admin.products', ['products' => $products]);
+    }
 }
