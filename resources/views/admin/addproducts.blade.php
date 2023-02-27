@@ -12,7 +12,7 @@
 			</div>
 			<div class="form-group">
 				<label>Details</label>
-				<input type="text" class="form-control mt-2 mb-3" name="detail" placeholder="Enter address" value="{{old('detail')}}" required>
+				<textarea rows=10 type="text" class="form-control mt-2 mb-3" name="detail" placeholder="Enter details" required>{{old('detail')}}</textarea>
 			</div>
             <div class="form-group">
                 <label>Price</label>
