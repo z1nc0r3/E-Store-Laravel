@@ -65,9 +65,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['admin']], function () {
     Route::post('/addproducts/check', [ProductsController::class, 'addProduct']);
 
     // Actions for product
-    Route::get('/showproduct', function () {
-        return view('admin.showproduct');
-    })->name('admin.showproduct');
+    Route::get('/showproduct/{id}', [ProductsController::class, 'showProduct'])->name('admin.showproduct');
 
     Route::get('/editproduct/{id}', [ProductsController::class, 'editProduct'])->name('admin.editproduct');
 

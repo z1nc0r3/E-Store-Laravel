@@ -40,6 +40,7 @@ class UserAuthController extends Controller
         } else {
             session() -> put('isLogged', false);
             session() -> put('loginError', 'Invalid email or password');
+            
             error_log('here');
             return redirect() -> route('login');
         }

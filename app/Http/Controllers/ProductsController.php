@@ -32,6 +32,12 @@ class ProductsController extends Controller
         return view('admin.products', ['products' => $products]);
     }
 
+    public function showProduct($id) {
+        $product = Products::find($id);
+
+        return view('admin.showproduct', ['product' => $product]);
+    }
+
     public function deleteProduct($id) {
         $product = Products::find($id);
 
