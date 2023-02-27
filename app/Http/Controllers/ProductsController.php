@@ -54,6 +54,22 @@ class ProductsController extends Controller
     }
 
     public function updateProduct(Request $request) {
-        
+        $request -> validate([
+            'name' => 'required',
+            'detail' => 'required',
+            'price' => 'required | numeric'
+        ]);
+
+        $product = Products::find($request -> get('id'));
+
+        $product -> name = $request -> get('name');
+        $product -> detail = $request -> get('detail');
+        $product -> price = $request -> get('price');
+
+        if ($product -> save()) {
+            return redirect() -> route('admin.products');
+        } else {
+            return redirect() -> back();
+        }
     }
 }

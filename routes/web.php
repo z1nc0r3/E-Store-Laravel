@@ -69,6 +69,8 @@ Route::group(['prefix' => 'admin', 'middleware' => ['admin']], function () {
 
     Route::get('/editproduct/{id}', [ProductsController::class, 'editProduct'])->name('admin.editproduct');
 
+    Route::post('/updateproduct/check', [ProductsController::class, 'updateProduct']);
+
     Route::get('/deleteproduct/{id}', [ProductsController::class, 'deleteProduct'])->name('admin.deleteproduct');
 
     // Employee routes
