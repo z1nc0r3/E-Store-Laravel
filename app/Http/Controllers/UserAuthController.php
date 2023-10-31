@@ -24,6 +24,8 @@ class UserAuthController extends Controller
             session() -> put('role', $role);
             session() -> put('name', session() -> has('name') ? session() -> get('name') : Auth::user() -> name);
 
+            error_log($role);
+
             switch ($role) {
                 case 'admin':
                     return redirect() -> route('admin.dashboard');

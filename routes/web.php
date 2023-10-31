@@ -46,6 +46,7 @@ Route::get('/register', function () {
 Route::post('/login/check', [UserAuthController::class, 'login']);
 Route::post('/register/check', [UserAuthController::class, 'register']);
 
+// admin routes
 Route::group(['prefix' => 'admin', 'middleware' => ['admin']], function () {
     Route::get('/', function () {
         return redirect()->route('admin.dashboard');
@@ -56,7 +57,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['admin']], function () {
     })->name('admin.dashboard');
 
     // Products routes
-    Route::get('/products', [ProductsController::class, 'showProducts'])->name('admin.products');
+    Route::get('/products', [ProductsController::class, 'showProductsAdmin'])->name('admin.products');
 
     Route::get('/addproducts', function () {
         return view('admin.addproducts');
@@ -65,7 +66,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['admin']], function () {
     Route::post('/addproducts/check', [ProductsController::class, 'addProduct']);
 
     // Actions for product
-    Route::get('/showproduct/{id}', [ProductsController::class, 'showProduct'])->name('admin.showproduct');
+    Route::get('/showproduct/{id}', [ProductsController::class, 'showProductAdmin'])->name('admin.showproduct');
 
     Route::get('/editproduct/{id}', [ProductsController::class, 'editProduct'])->name('admin.editproduct');
 
@@ -79,6 +80,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['admin']], function () {
     });
 });
 
+// customer routes
 Route::group(['prefix' => 'customer', 'middleware' => ['customer']], function () {
     Route::get('/', function () {
         return redirect()->route('customer.dashboard');
@@ -88,11 +90,12 @@ Route::group(['prefix' => 'customer', 'middleware' => ['customer']], function ()
         return view('customer.dashboard');
     })->name('customer.dashboard');
 
-    Route::get('/order', function () {
-        return view('customer.order');
-    });
+    Route::get('/order', [ProductsController::class, 'showProductsCustomer']);
+
+    Route::get('/addtocart/{id}', [ProductsController::class, 'showProductCustomer']) -> name('customer.addtocart');
 });
 
+// employee routes
 Route::group(['prefix' => 'employee', 'middleware' => ['employee']], function () {
     Route::get('/', function () {
         return redirect()->route('employee.dashboard');
@@ -100,10 +103,10 @@ Route::group(['prefix' => 'employee', 'middleware' => ['employee']], function ()
 
     Route::get('/dashboard', function () {
         return view('customer.dashboard');
-    })->name('customer.dashboard');
+    })->name('employee.dashboard');
 
     Route::get('/order', function () {
-        return view('customer.order');
+        return view('employee.myorders');
     });
 });
 

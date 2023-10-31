@@ -27,15 +27,26 @@ class ProductsController extends Controller
         }
     }
 
-    public function showProducts() {
+    public function showProductsAdmin() {
         $products = Products::all();
         return view('admin.products', ['products' => $products]);
     }
 
-    public function showProduct($id) {
+    public function showProductsCustomer() {
+        $products = Products::all();
+        return view('customer.order', ['products' => $products]);
+    }
+
+    public function showProductAdmin($id) {
         $product = Products::find($id);
 
         return view('admin.showproduct', ['product' => $product]);
+    }
+
+    public function showProductCustomer($id) {
+        $product = Products::find($id);
+
+        return view('customer.addtocart', ['product' => $product]);
     }
 
     public function deleteProduct($id) {

@@ -18,7 +18,7 @@
 						<a class="nav-link {{(session() -> get('current') == 'products') ? 'active' : ''}}" href="{{url('/admin/products')}}">Products</a>
 					</li>
 					<li class="nav-item">
-						<a class="nav-link {{(session() -> get('current') == 'employees') ? 'active' : ''}}" href="{{url('/admin/empoloyee')}}">Employees</a>
+						<a class="nav-link {{(session() -> get('current') == 'employees') ? 'active' : ''}}" href="{{url('/admin/employees')}}">Employees</a>
 					</li>
 				</ul>
                 <div>

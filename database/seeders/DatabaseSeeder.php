@@ -18,7 +18,7 @@ class DatabaseSeeder extends Seeder
             'email' => 'admin@estore.com',
             'gender' => 'M',
             'password' => 'admin123',
-            'role' => 'admin',
+            'role' => 'admin'
         ]);
     }
 }
